@@ -1,0 +1,27 @@
+<resources>
+    <string name="title_home">Welcome to CRS Application! </string>
+    <string name="title_returning_home">Welcome back ! </string>
+    <string name="user_guide">To be Added </string>
+    <string-array name="mode_arrays">
+        <item>Work</item>
+        <item>Relax</item>
+        <item>Social</item>
+    </string-array>
+    <string-array name="notification_arrays">
+        <item>Ring</item>
+        <item>Vibrate</item>
+        <item>Dismiss All Notifications</item>
+    </string-array>
+    <string-array name="app_arrays">
+        <item>No selection</item>
+        <item>App1</item>
+        <item>App2</item>
+        <item>App3</item>
+    </string-array>
+    <string-array name="location_arrays">
+        <item>No selection</item>
+        <item>Location1</item>
+        <item>Location1</item>
+        <item>Location1</item>
+    </string-array>
+</resources>
