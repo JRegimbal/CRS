@@ -96,6 +96,9 @@ public class Start_Session extends AppCompatActivity{
                     } else {
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.putString(getString(R.string.current_location), uuid.toString());
+                        if (preferences.contains(getString(R.string.override_mode))) {
+                            editor.remove(getString(R.string.override_mode));
+                        }
                         editor.commit();
                     }
 
