@@ -27,7 +27,7 @@ public class Start_Session extends AppCompatActivity{
         setContentView(R.layout.activity_start_session);
         super.onCreate(savedInstanceState);
 
-        preferences = getPreferences(MODE_PRIVATE);
+        preferences = getSharedPreferences("CRS", MODE_PRIVATE);
 
         Button overwriteSession = findViewById(R.id.buttonOverwrite);
         overwriteSession.setOnClickListener(new View.OnClickListener() {

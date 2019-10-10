@@ -8,6 +8,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
@@ -30,18 +32,24 @@ import java.util.Map;
 public class Overwrite_Session extends Activity {
     private SharedPreferences preferences = null;
     private Map<String, String> nameToUUID = null;
+    private String selId = null;
+    private int selIdx = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overwrite_session);
 
-        preferences = getPreferences(MODE_PRIVATE);
+        preferences = getSharedPreferences("CRS", MODE_PRIVATE);
+        selId = preferences.getString(getString(R.string.current_location), null);
 
         ArrayList<String> locationNames = getLocationNames();
+        ArrayList<String> onlyNames = (ArrayList<String>)locationNames.clone();
+        final ArrayAdapter<String> ar1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, onlyNames);
         locationNames.add(0, "No selection");
         // final String[] spstr = getResources().getStringArray(R.array.location_arrays);
         final Spinner sp = (Spinner)findViewById(R.id.overwrite_location_spinner);
+        final Spinner currentLocSpinner = findViewById(R.id.overwrite_current_location_spinner);
         final ArrayAdapter<String> ar = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,locationNames);
         sp.setAdapter(ar);
         sp.setOnItemSelectedListener(new OnItemSelectedListener()
@@ -61,6 +69,27 @@ public class Overwrite_Session extends Activity {
             @Override
             public void onNothingSelected(AdapterView<?> parent)
             {
+            }
+        });
+
+        currentLocSpinner.setAdapter(ar1);
+        if (selIdx > 0)
+        currentLocSpinner.setSelection(selIdx);
+
+        Button confirm = findViewById(R.id.buttonConfirmOverwrite);
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String item = (String)currentLocSpinner.getSelectedItem();
+                String selUuid = nameToUUID.get(item);
+                if (!selId.equals(selUuid)) {
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString(getString(R.string.current_location), selUuid);
+                    editor.apply();
+                }
+
+                Intent intent = new Intent(view.getContext(), Start_Session.class);
+                startActivity(intent);
             }
         });
     }
@@ -83,7 +112,11 @@ public class Overwrite_Session extends Activity {
                     name += String.valueOf(digit);
                 }
                 locationNames.add(name);
-                nameToUUID.put(name, location.getString("uuid"));
+                String uuid = location.getString("uuid");
+                if (uuid.equals(selId)) {
+                    selIdx = i;
+                }
+                nameToUUID.put(name, uuid);
             }
         } catch (JSONException e) {
             Log.e("JSON", e.getMessage());
