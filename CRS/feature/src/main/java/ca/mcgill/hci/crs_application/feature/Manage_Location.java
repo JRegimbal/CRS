@@ -75,8 +75,8 @@ public class Manage_Location extends Activity {
     private JSONObject getCurrentLocation() {
         JSONObject location = null;
         if (preferences != null) {
-            if (preferences.contains("location")) {
-                String uuid = preferences.getString("location", null);
+            if (preferences.contains(getString(R.string.current_location))) {
+                String uuid = preferences.getString(getString(R.string.current_location), null);
                 location = SavedData.getLocation(this, uuid);
             }
         }

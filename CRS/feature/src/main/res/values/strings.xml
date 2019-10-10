@@ -2,6 +2,8 @@
     <string name="title_home">Welcome to CRS Application! </string>
     <string name="title_returning_home">Welcome back ! </string>
     <string name="user_guide">To be Added </string>
+    <string name="override_mode">overrideMode</string>
+    <string name="current_location">location</string>
     <string-array name="mode_arrays">
         <item>Work</item>
         <item>Relax</item>

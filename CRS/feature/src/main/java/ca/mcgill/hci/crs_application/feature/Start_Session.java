@@ -88,7 +88,10 @@ public class Start_Session extends AppCompatActivity{
                         location.put("name", "New Location");
                         locations.put(location);
                         SharedPreferences.Editor editor = preferences.edit();
-                        editor.putString("location", uuid.toString());
+                        editor.putString(getString(R.string.current_location), uuid.toString());
+                        if (preferences.contains(getString(R.string.override_mode))) {
+                            editor.remove(getString(R.string.override_mode));
+                        }
                         editor.commit();
                         SavedData.updateOrAddLocation(this, location);
                         // Call manage_location_activity
@@ -97,7 +100,7 @@ public class Start_Session extends AppCompatActivity{
                         startActivity(intent);
                     } else {
                         SharedPreferences.Editor editor = preferences.edit();
-                        editor.putString("location", uuid.toString());
+                        editor.putString(getString(R.string.current_location), uuid.toString());
                         editor.commit();
                     }
 
@@ -118,17 +121,24 @@ public class Start_Session extends AppCompatActivity{
 
     private void updateForCurrentLocation() {
         if (preferences != null) {
-            if (preferences.contains("location")) {
-                String uuid = preferences.getString("location", null);
+            String locationText = "N/A";
+            String modeText = "N/A";
+            if (preferences.contains(getString(R.string.current_location))) {
+                String uuid = preferences.getString(getString(R.string.current_location), null);
                 JSONObject location = SavedData.getLocation(this, uuid);
                 if (location != null) {
                     try {
-                        setLocationAndModeText(location.getString("name"), location.getString("mode"));
+                        locationText = location.getString("name");
+                        modeText = location.getString("mode");
                     } catch (JSONException e) {
                         Log.e("JSON", e.getMessage());
                     }
                 }
             }
+            if (preferences.contains(getString(R.string.override_mode))) {
+                modeText = preferences.getString(getString(R.string.override_mode), null);
+            }
+            setLocationAndModeText(locationText, modeText);
         }
     }
 
