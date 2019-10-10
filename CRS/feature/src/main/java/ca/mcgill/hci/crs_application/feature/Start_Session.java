@@ -82,18 +82,12 @@ public class Start_Session extends AppCompatActivity{
                         }
                     }
                     if (location == null) {
-                        location = new JSONObject();
-                        location.put("uuid", uuid.toString());
-                        location.put("mode", "Work");
-                        location.put("name", "New Location");
-                        locations.put(location);
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.putString(getString(R.string.current_location), uuid.toString());
                         if (preferences.contains(getString(R.string.override_mode))) {
                             editor.remove(getString(R.string.override_mode));
                         }
                         editor.commit();
-                        SavedData.updateOrAddLocation(this, location);
                         // Call manage_location_activity
                         Intent intent = new Intent(Start_Session.this, Manage_Location.class);
                         intent.putExtra("uuid", uuid.toString());

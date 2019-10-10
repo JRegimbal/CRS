@@ -64,22 +64,13 @@ public class Manage_Location extends Activity {
         // Get UUID from calling intent
         uuid = getIntent().getStringExtra("uuid");
         JSONObject location = SavedData.getLocation(this, uuid);
-        TextView locationName = findViewById(R.id.locationName);
-        try {
-            locationName.setText(location.getString("name"));
-        } catch (JSONException e) {
-            Log.e("JSON", e.getMessage());
-        }
-    }
-
-    private JSONObject getCurrentLocation() {
-        JSONObject location = null;
-        if (preferences != null) {
-            if (preferences.contains(getString(R.string.current_location))) {
-                String uuid = preferences.getString(getString(R.string.current_location), null);
-                location = SavedData.getLocation(this, uuid);
+        if (location != null) {
+            TextView locationName = findViewById(R.id.locationName);
+            try {
+                locationName.setText(location.getString("name"));
+            } catch (JSONException e) {
+                Log.e("JSON", e.getMessage());
             }
         }
-        return location;
     }
 }
