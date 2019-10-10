@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -27,7 +28,7 @@ public class Start_Session extends AppCompatActivity{
         setContentView(R.layout.activity_start_session);
         super.onCreate(savedInstanceState);
 
-        preferences = getSharedPreferences("CRS", MODE_PRIVATE);
+        preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         Button overwriteSession = findViewById(R.id.buttonOverwrite);
         overwriteSession.setOnClickListener(new View.OnClickListener() {

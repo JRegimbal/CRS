@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Activity;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -40,7 +41,7 @@ public class Overwrite_Session extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overwrite_session);
 
-        preferences = getSharedPreferences("CRS", MODE_PRIVATE);
+        preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         selId = preferences.getString(getString(R.string.current_location), null);
 
         ArrayList<String> locationNames = getLocationNames();
