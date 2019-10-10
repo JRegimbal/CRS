@@ -51,6 +51,7 @@ public class Overwrite_Session extends Activity {
         // final String[] spstr = getResources().getStringArray(R.array.location_arrays);
         final Spinner sp = (Spinner)findViewById(R.id.overwrite_location_spinner);
         final Spinner currentLocSpinner = findViewById(R.id.overwrite_current_location_spinner);
+        final Spinner modeSpinner = findViewById(R.id.modespinner);
         final ArrayAdapter<String> ar = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,locationNames);
         sp.setAdapter(ar);
         sp.setOnItemSelectedListener(new OnItemSelectedListener()
@@ -74,21 +75,75 @@ public class Overwrite_Session extends Activity {
         });
 
         currentLocSpinner.setAdapter(ar1);
+        currentLocSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String s = ((TextView)view).getText().toString();
+                String uuid = nameToUUID.get(s);
+                JSONObject obj = SavedData.getLocation(view.getContext(), uuid);
+                try {
+                    String mode = obj.getString("mode");
+                    String[] modes = getResources().getStringArray(R.array.mode_arrays);
+                    for (int j = 0; j < modes.length; j++) {
+                        if (mode.equals(modes[j])) {
+                            modeSpinner.setSelection(j);
+                            break;
+                        }
+                    }
+                } catch (JSONException e) {
+                    Log.i("JSON", e.getMessage());
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        if (selId != null) {
+            JSONObject obj = SavedData.getLocation(this, selId);
+            try {
+                String mode = obj.getString("mode");
+                String[] modes = getResources().getStringArray(R.array.mode_arrays);
+                for (int i = 0; i < modes.length; i++) {
+                    if (mode.equals(modes[i])) {
+                        modeSpinner.setSelection(i);
+                        break;
+                    }
+                }
+            } catch (JSONException e) {
+                Log.i("JSON", e.getMessage());
+            }
+        }
+
         if (selIdx > 0)
-        currentLocSpinner.setSelection(selIdx);
+            currentLocSpinner.setSelection(selIdx);
 
         Button confirm = findViewById(R.id.buttonConfirmOverwrite);
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String item = (String)currentLocSpinner.getSelectedItem();
+                SharedPreferences.Editor editor = preferences.edit();
                 String selUuid = nameToUUID.get(item);
                 if (!selId.equals(selUuid)) {
-                    SharedPreferences.Editor editor = preferences.edit();
                     editor.putString(getString(R.string.current_location), selUuid);
-                    editor.apply();
                 }
 
+                JSONObject obj = SavedData.getLocation(view.getContext(), selUuid);
+                try {
+                    String mode = obj.getString("mode");
+                    if (!mode.equals(modeSpinner.getSelectedItem().toString())) {
+                        editor.putString(getString(R.string.override_mode), modeSpinner.getSelectedItem().toString());
+                    } else {
+                        editor.remove(getString(R.string.override_mode));
+                    }
+                } catch (JSONException e) {
+                    Log.e("JSON", e.getMessage());
+                }
+
+                editor.apply();
                 Intent intent = new Intent(view.getContext(), Start_Session.class);
                 startActivity(intent);
             }
