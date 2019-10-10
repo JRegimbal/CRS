@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Returning_User extends AppCompatActivity {
 
@@ -22,8 +23,9 @@ public class Returning_User extends AppCompatActivity {
         startReturningUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Returning_User.this, login.class);
-                startActivity(intent);
+                //Intent intent = new Intent(Returning_User.this, login.class);
+                //startActivity(intent);
+                Toast.makeText(v.getContext(), "Importing is not yet implemented!", Toast.LENGTH_LONG).show();
             }
         });
 
