@@ -42,7 +42,7 @@
             app:layout_constraintTop_toBottomOf="@id/buttonDeleteLocation" />
 
         <Spinner
-            android:id="@+id/location_spinner"
+            android:id="@+id/manageLocation_mode_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:entries="@array/mode_arrays" />

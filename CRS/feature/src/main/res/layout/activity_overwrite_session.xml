@@ -111,7 +111,7 @@
             app:layout_constraintTop_toBottomOf="@id/notification" />
 
         <Spinner
-            android:id="@+id/location_spinner"
+            android:id="@+id/overwrite_location_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:entries="@array/location_arrays" />
