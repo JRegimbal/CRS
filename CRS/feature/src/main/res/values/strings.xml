@@ -14,12 +14,6 @@
         <item>Vibrate</item>
         <item>Dismiss All Notifications</item>
     </string-array>
-    <string-array name="app_arrays">
-        <item>No selection</item>
-        <item>App1</item>
-        <item>App2</item>
-        <item>App3</item>
-    </string-array>
     <string-array name="location_arrays">
         <item>No selection</item>
         <item>Location1</item>
@@ -28,5 +22,4 @@
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

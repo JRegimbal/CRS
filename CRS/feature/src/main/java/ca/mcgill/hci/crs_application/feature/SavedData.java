@@ -95,6 +95,14 @@ class SavedData {
         return settings;
     }
 
+    public static void writeSettings(Context context, String mode, JSONArray array) throws Exception {
+        JSONObject contents = getFileContents(context);
+        JSONObject settings = contents.getJSONObject("settings");
+        settings.put(mode.toLowerCase(), array);
+        contents.put("settings", settings);
+        writeFileContents(context, contents);
+    }
+
     public static JSONObject getLocation(Context context, String uuid) {
         JSONObject location = null;
         try {

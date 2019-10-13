@@ -10,7 +10,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,6 +27,7 @@ import java.util.List;
 public class Manage_Applications extends AppCompatActivity {
     private PackageManager pm;
     private String mode;
+    private ArrayList<String> settingsToWrite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,23 @@ public class Manage_Applications extends AppCompatActivity {
         intro.setText(intro.getText().toString() + " " + mode);
 
         updateAppList();
+
+        Button confirmButton = findViewById(R.id.appMangeConfirm);
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    JSONArray array = new JSONArray();
+                    for (String entry : settingsToWrite) {
+                        array.put(entry);
+                    }
+                    SavedData.writeSettings(v.getContext(), mode, array);
+                } catch (Exception e) {
+                    Log.e("Write Settings", e.getMessage());
+                }
+                finish();
+            }
+        });
     }
 
     @Override
@@ -55,10 +75,11 @@ public class Manage_Applications extends AppCompatActivity {
 
         try {
             JSONArray modeSettings = SavedData.getSettings(this, mode);
-            List<String> settingsList = new ArrayList<String>();
+            ArrayList<String> settingsList = new ArrayList<String>();
             for (int i = 0; i < modeSettings.length(); i++) {
                 settingsList.add(modeSettings.getString(i));
             }
+            settingsToWrite = (ArrayList<String>)settingsList.clone();
 
             for (ApplicationInfo application : applications) {
                 LinearLayout layout = new LinearLayout(this);
@@ -71,6 +92,19 @@ public class Manage_Applications extends AppCompatActivity {
                 checkbox.setText(application.packageName);
                 checkbox.setChecked(checked);
                 checkbox.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+                checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                        String name = compoundButton.getText().toString();
+                        if (b) {
+                            settingsToWrite.remove(name);
+                        } else {
+                            if (!settingsToWrite.contains(name)) {
+                                settingsToWrite.add(name);
+                            }
+                        }
+                    }
+                });
                 layout.addView(checkbox);
                 appLayout.addView(layout);
             }
@@ -81,8 +115,7 @@ public class Manage_Applications extends AppCompatActivity {
     }
 
     private List<ApplicationInfo> getInstalledApplications() {
-        List<ApplicationInfo> applications = pm.getInstalledApplications(PackageManager.GET_META_DATA);
-        return applications;
+        return pm.getInstalledApplications(PackageManager.GET_META_DATA);
        /* for (ApplicationInfo info : applications) {
             Drawable icon = pm.getApplicationIcon(info);
             Log.d("App", info.packageName);
