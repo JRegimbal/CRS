@@ -38,6 +38,17 @@
 
 
     <Button
+        android:id="@+id/userGuideButton"
+        android:layout_width="380dp"
+        android:layout_height="65dp"
+        android:background="@drawable/round_button"
+        android:text="Open User Guide"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollViewUserGuide" />
+
+    <Button
         android:id="@+id/buttonNewUserStartSession"
         android:layout_width="380dp"
         android:layout_height="65dp"
