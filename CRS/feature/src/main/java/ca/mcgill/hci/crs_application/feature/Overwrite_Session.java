@@ -2,6 +2,9 @@ package ca.mcgill.hci.crs_application.feature;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.app.Activity;
 import android.preference.PreferenceManager;
@@ -98,6 +101,16 @@ public class Overwrite_Session extends Activity {
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
+            }
+        });
+
+        Button manageApplications = findViewById(R.id.manageApplicationButton);
+        manageApplications.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), Manage_Applications.class);
+                intent.putExtra("mode", (String)modeSpinner.getSelectedItem());
+                startActivity(intent);
             }
         });
 

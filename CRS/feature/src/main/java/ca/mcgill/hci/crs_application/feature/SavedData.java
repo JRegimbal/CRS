@@ -83,6 +83,18 @@ class SavedData {
         }
     }
 
+    public static JSONArray getSettings(Context context, String mode) {
+        JSONArray settings = null;
+        try {
+            JSONObject contents = getFileContents(context);
+            JSONObject parentSettings = contents.getJSONObject("settings");
+            settings = parentSettings.getJSONArray(mode.toLowerCase());
+        } catch (JSONException e) {
+            Log.e("SavedData.getSettings", e.getMessage());
+        }
+        return settings;
+    }
+
     public static JSONObject getLocation(Context context, String uuid) {
         JSONObject location = null;
         try {
@@ -123,6 +135,11 @@ class SavedData {
         JSONObject obj = new JSONObject();
         try {
             obj.put("locations", new JSONArray());
+            JSONObject settings = new JSONObject();
+            settings.put("social", new JSONArray());
+            settings.put("relax", new JSONArray());
+            settings.put("work", new JSONArray());
+            obj.put("settings", settings);
         } catch (Exception e) {
             Log.e("File", e.getMessage());
         }
