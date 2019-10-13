@@ -110,8 +110,7 @@
             android:entries="@array/location_arrays" />
     </LinearLayout>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -125,11 +124,13 @@
             android:textSize="25sp"
             app:layout_constraintTop_toBottomOf="@id/manageLocation" />
 
-        <Spinner
-            android:id="@+id/app_spinner"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/manageApplicationButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:entries="@array/app_arrays" />
+            android:layout_weight="1"
+            android:text="Manage" />
+
     </LinearLayout>
     <Button
         android:id="@+id/buttonConfirmOverwrite"
