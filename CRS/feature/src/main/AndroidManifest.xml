@@ -9,7 +9,17 @@
     <uses-permission android:name="android.permission.NFC" />
 
     <application>
-        <activity android:name=".Manage_Applications"></activity>
+        <service
+            android:name=".NotificationListener"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".Manage_Applications" />
         <activity
             android:name=".Launch"
             android:label="@string/app_name">
@@ -19,9 +29,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Returning_User"></activity>
-        <activity android:name=".login"></activity>
-        <activity android:name=".New_User"></activity>
+        <activity android:name=".Returning_User" />
+        <activity android:name=".login" />
+        <activity android:name=".New_User" />
         <activity android:name=".Start_Session">
             <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
@@ -31,8 +41,8 @@
                 <data android:scheme="uuid" />
             </intent-filter>
         </activity>
-        <activity android:name=".Overwrite_Session"></activity>
-        <activity android:name=".Manage_Location"></activity>
+        <activity android:name=".Overwrite_Session" />
+        <activity android:name=".Manage_Location" />
     </application>
 
 </manifest>
