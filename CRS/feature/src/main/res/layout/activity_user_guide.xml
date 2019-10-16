@@ -18,47 +18,31 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/scrollViewUserGuide"
-        android:layout_gravity="center_horizontal"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/message"
-        android:layout_marginTop="80dp"
-        android:textSize="20sp">
-        <TextView
-            android:id="@+id/guide_text"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:textSize="20sp"
-            android:text="@string/user_guide"/>
-    </ScrollView>
-
 
     <Button
         android:id="@+id/userGuideButton"
         android:layout_width="380dp"
         android:layout_height="65dp"
+        android:layout_marginTop="100dp"
         android:background="@drawable/round_button"
         android:text="Open User Guide"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollViewUserGuide" />
+        app:layout_constraintTop_toBottomOf="@+id/message" />
 
     <Button
         android:id="@+id/buttonNewUserStartSession"
         android:layout_width="380dp"
         android:layout_height="65dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/round_button"
+        android:clickable="true"
+        android:text="Start Session"
+        android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollViewUserGuide"
-        android:layout_marginTop="80dp"
-        android:text="Start"
-        android:textSize="20sp"
-        android:clickable="true"
-        android:background="@drawable/round_button" />
+        app:layout_constraintTop_toBottomOf="@+id/userGuideButton" />
 
 </android.support.constraint.ConstraintLayout>

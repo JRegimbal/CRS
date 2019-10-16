@@ -4,7 +4,7 @@
     <string name="user_guide">To be Added </string>
     <string name="override_mode">overrideMode</string>
     <string name="current_location">location</string>
-    <string name="user_guide_url">http://www.cim.mcgill.ca/~jer/courses/hci/project/2019/www.ece.mcgill.ca/~jregim/hci/notebook/</string>
+    <string name="user_guide_url">http://www.cim.mcgill.ca/~jer/courses/hci/project/2019/www.ece.mcgill.ca/~jregim/hci/notebook/computer-prototype/user-manual.html</string>
     <string-array name="mode_arrays">
         <item>Work</item>
         <item>Relax</item>
