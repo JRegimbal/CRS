@@ -89,13 +89,15 @@ public class Manage_Applications extends AppCompatActivity {
                 boolean checked = !settingsList.contains(application.packageName);
 
                 CheckBox checkbox = new CheckBox(this);
-                checkbox.setText(application.packageName);
+                //checkbox.setText(application.packageName);
+                checkbox.setText(application.loadLabel(pm).toString());
+                checkbox.setHint(application.packageName);
                 checkbox.setChecked(checked);
                 checkbox.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
                 checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                        String name = compoundButton.getText().toString();
+                        String name = compoundButton.getHint().toString();
                         if (b) {
                             settingsToWrite.remove(name);
                         } else {
