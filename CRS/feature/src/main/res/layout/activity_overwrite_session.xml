@@ -1,135 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/overwriteCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/location"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="Location:"
-            android:textColor="#000000"
-            android:textSize="25sp"
-            app:layout_constraintTop_toBottomOf="@id/message" />
-
-        <Spinner
-            android:id="@+id/overwrite_current_location_spinner"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:layout_weight="1" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/mode"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="Mode:"
-            android:textColor="#000000"
-            android:textSize="25sp"
-            app:layout_constraintTop_toBottomOf="@id/overwrite_current_location_spinner" />
-
-        <Spinner
-            android:id="@+id/modespinner"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:entries="@array/mode_arrays" />
-    </LinearLayout>
-    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Location:"
+                android:textColor="#000000"
+                android:textSize="25sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Spinner
+                android:id="@+id/overwrite_current_location_spinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/location"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/location"
+                app:layout_constraintTop_toTopOf="@+id/location" />
+
+            <TextView
+                android:id="@+id/mode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mode:"
+                android:textColor="#000000"
+                android:textSize="25sp"
+                app:layout_constraintStart_toStartOf="@+id/location"
+                app:layout_constraintTop_toBottomOf="@+id/location" />
+
+            <Spinner
+                android:id="@+id/modespinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:entries="@array/mode_arrays"
+                app:layout_constraintBottom_toBottomOf="@+id/mode"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/mode"
+                app:layout_constraintTop_toTopOf="@+id/mode" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/manageCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/notification"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_marginTop="8dp"
-            android:text="Notification Setting:"
-            android:textColor="#000000"
-            android:textSize="25sp"
-            app:layout_constraintTop_toBottomOf="@id/mode" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/overwriteCardView">
 
-        <Spinner
-            android:id="@+id/notificationspinner"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:entries="@array/notification_arrays" />
-    </LinearLayout>-->
+            android:layout_height="match_parent">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/manageLocation"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Manage Locations:"
-            android:textColor="#000000"
-            android:textSize="25sp"
-            app:layout_constraintTop_toBottomOf="@id/modespinner" />
+            <TextView
+                android:id="@+id/manageLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Manage Locations:"
+                android:textColor="#000000"
+                android:textSize="25sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <Spinner
-            android:id="@+id/overwrite_location_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:entries="@array/location_arrays" />
-    </LinearLayout>
+            <Spinner
+                android:id="@+id/overwrite_location_spinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:entries="@array/location_arrays"
+                app:layout_constraintBottom_toBottomOf="@+id/manageLocation"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/manageLocation"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/manageApp"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Manage Applications:"
-            android:textColor="#000000"
-            android:textSize="25sp"
-            app:layout_constraintTop_toBottomOf="@id/manageLocation" />
+            <TextView
+                android:id="@+id/manageApp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Manage Applications:"
+                android:textColor="#000000"
+                android:textSize="25sp"
+                app:layout_constraintBottom_toBottomOf="@+id/manageApplicationButton"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/manageApplicationButton" />
 
-        <Button
-            android:id="@+id/manageApplicationButton"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Manage" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/manageApplicationButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Manage"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/manageApp"
+                app:layout_constraintTop_toBottomOf="@+id/manageLocation" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
-    <Button
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonConfirmOverwrite"
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:layout_marginTop="100dp"
-        android:background="@drawable/round_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
         android:text="@string/confirm_text"
         android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/manageApplicationButton" />
-</LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/manageCardView"
+        app:layout_constraintVertical_bias="0.32999998" />
+</androidx.constraintlayout.widget.ConstraintLayout>
