@@ -10,11 +10,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Manage_Location extends Activity {
+public class Manage_Location extends CRSActivity {
     private String uuid = null;
     private SharedPreferences preferences = null;
 
@@ -45,6 +46,7 @@ public class Manage_Location extends Activity {
                 } else {
                     Log.e("Manage", "UUID is null!");
                 }
+
                 Intent intent = new Intent(Manage_Location.this, Start_Session.class);
                 startActivity(intent);
             }
@@ -55,9 +57,22 @@ public class Manage_Location extends Activity {
             @Override
             public void onClick(View v) {
                 if (uuid != null) {
-                    SavedData.deleteLocation(v.getContext(), uuid);
-                    Intent intent = new Intent(Manage_Location.this, Start_Session.class);
-                    startActivity(intent);
+                    if (SavedData.getNumLocations(v.getContext()) > 1) {
+                        SavedData.deleteLocation(v.getContext(), uuid);
+                        // Check if this was the current location
+                        if (uuid.equals(preferences.getString(getString(R.string.current_location), null))) {
+                            SharedPreferences.Editor editor = preferences.edit();
+                            editor.putString(getString(R.string.current_location), null);
+                            editor.putString(getString(R.string.override_mode), null);
+                            editor.apply();
+                        }
+                        finish();
+                        //Intent intent = new Intent(Manage_Location.this, Start_Session.class);
+                        //startActivity(intent);
+                    }
+                    else {
+                        Toast.makeText(v.getContext(), "Cannot delete the only location!", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });

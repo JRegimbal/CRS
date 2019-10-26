@@ -20,6 +20,7 @@
         </service>
 
         <activity android:name=".Manage_Applications"
+            android:parentActivityName=".Overwrite_Session"
             android:label="Notifications Enabled for "/>
         <activity
             android:name=".Launch"
@@ -45,9 +46,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".Overwrite_Session"
+            android:parentActivityName=".Start_Session"
             android:label="Session and Settings" />
         <activity android:name=".Manage_Location"
-            android:label="Manage Location"/>
+            android:label="Manage Location"
+            android:parentActivityName=".Overwrite_Session"/>
     </application>
 
 </manifest>

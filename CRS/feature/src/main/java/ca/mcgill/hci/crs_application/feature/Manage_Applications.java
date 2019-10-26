@@ -35,6 +35,7 @@ public class Manage_Applications extends CRSActivity {
         setContentView(R.layout.activity_manage__applications);
 
         String label = getSupportActionBar().getTitle().toString();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         pm = getPackageManager();
         Intent intent = getIntent();

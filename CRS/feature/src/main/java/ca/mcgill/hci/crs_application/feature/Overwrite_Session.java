@@ -44,6 +44,18 @@ public class Overwrite_Session extends CRSActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overwrite_session);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        setUpMenu();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setUpMenu();
+    }
+
+    private void setUpMenu() {
         preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         selId = preferences.getString(getString(R.string.current_location), null);
 
@@ -157,8 +169,9 @@ public class Overwrite_Session extends CRSActivity {
                 }
 
                 editor.apply();
-                Intent intent = new Intent(view.getContext(), Start_Session.class);
-                startActivity(intent);
+                finish();
+                //Intent intent = new Intent(view.getContext(), Start_Session.class);
+                //startActivity(intent);
             }
         });
     }

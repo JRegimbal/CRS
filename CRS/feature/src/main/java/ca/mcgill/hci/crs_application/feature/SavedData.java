@@ -121,6 +121,18 @@ class SavedData {
         return location;
     }
 
+    public static int getNumLocations(Context context) {
+        int locations = 0;
+        try {
+            JSONObject contents = getFileContents(context);
+            JSONArray locationArray = contents.getJSONArray("locations");
+            locations = locationArray.length();
+        } catch (JSONException e) {
+            Log.e("SavedData", e.getMessage());
+        }
+        return locations;
+    }
+
     public static void deleteLocation(Context context, String uuid) {
         try {
             JSONObject contents = getFileContents(context);
