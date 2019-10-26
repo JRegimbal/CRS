@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Returning_User extends AppCompatActivity {
+public class Returning_User extends CRSActivity {
 
 
 

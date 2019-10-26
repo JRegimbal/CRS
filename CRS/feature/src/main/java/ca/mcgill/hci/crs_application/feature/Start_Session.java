@@ -2,12 +2,17 @@ package ca.mcgill.hci.crs_application.feature;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -18,7 +23,7 @@ import org.json.JSONObject;
 
 import java.util.UUID;
 
-public class Start_Session extends AppCompatActivity{
+public class Start_Session extends CRSActivity {
 
     private JSONObject jsonObject = null;
     private SharedPreferences preferences = null;
@@ -30,6 +35,8 @@ public class Start_Session extends AppCompatActivity{
 
         preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
+
+        ActionBar toolbar = getSupportActionBar();
         Button overwriteSession = findViewById(R.id.buttonOverwrite);
         overwriteSession.setOnClickListener(new View.OnClickListener() {
             @Override

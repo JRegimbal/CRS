@@ -11,7 +11,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 
-public class Launch extends AppCompatActivity {
+public class Launch extends CRSActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

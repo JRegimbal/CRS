@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.net.URI;
 import java.net.URL;
 
-public class New_User extends AppCompatActivity {
+public class New_User extends CRSActivity {
 
 
     @Override
