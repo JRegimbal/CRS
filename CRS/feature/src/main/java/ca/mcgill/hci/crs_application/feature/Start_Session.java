@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -134,10 +135,10 @@ public class Start_Session extends CRSActivity {
     }
 
     private void setLocationAndModeText(String location, String mode) {
-        Button modeButton = findViewById(R.id.mode);
-        Button locationButton = findViewById(R.id.location);
-        modeButton.setText(mode);
-        locationButton.setText(location);
+        TextView modeText = findViewById(R.id.mode);
+        TextView locationText = findViewById(R.id.location);
+        modeText.setText("Mode: " + mode);
+        locationText.setText("Location: " + location);
     }
 
     private void updateForCurrentLocation() {
