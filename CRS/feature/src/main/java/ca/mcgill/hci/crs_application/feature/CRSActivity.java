@@ -2,9 +2,10 @@ package ca.mcgill.hci.crs_application.feature;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 class CRSActivity extends AppCompatActivity {
     @Override
