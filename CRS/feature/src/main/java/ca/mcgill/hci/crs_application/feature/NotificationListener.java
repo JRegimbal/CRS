@@ -21,7 +21,9 @@ import java.util.ArrayList;
 public class NotificationListener extends NotificationListenerService {
     private SharedPreferences preferences;
 
-    public NotificationListener() {
+    @Override
+    public void onCreate() {
+        super.onCreate();
         preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
     }
 
@@ -39,6 +41,7 @@ public class NotificationListener extends NotificationListenerService {
         if (sbn != null) {
             Log.d("NotificationListener", "Package: " + sbn.getPackageName());
             if (getList().contains(sbn.getPackageName())) {
+                Log.d("NotificationListener", "Cancel: " + sbn.getPackageName());
                 cancelNotification(sbn.getKey());
             }
         }
@@ -73,6 +76,9 @@ public class NotificationListener extends NotificationListenerService {
             } catch (JSONException e) {
                 Log.e("NotificationListener", e.getMessage());
             }
+        }
+        for (String name : list) {
+            Log.d("NotificationListener", name);
         }
         return list;
     }
