@@ -30,31 +30,50 @@ public class Start_Session extends CRSActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_start_session);
         super.onCreate(savedInstanceState);
 
         preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
+        if (!NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent().getAction()) && SavedData.getNumLocations(this) < 1) {
+            setContentView(R.layout.no_location_layout);
+        }
+        else {
+            setContentView(R.layout.activity_start_session);
 
-        ActionBar toolbar = getSupportActionBar();
-        Button overwriteSession = findViewById(R.id.buttonOverwrite);
-        overwriteSession.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Start_Session.this, Overwrite_Session.class);
-                startActivity(intent);
-            }
-        });
-        checkNFCIntent();
 
-        updateForCurrentLocation();
+            Button overwriteSession = findViewById(R.id.buttonOverwrite);
+            overwriteSession.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Start_Session.this, Overwrite_Session.class);
+                    startActivity(intent);
+                }
+            });
+            checkNFCIntent();
+
+            updateForCurrentLocation();
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        checkNFCIntent();
-        updateForCurrentLocation();
+        if (!NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent().getAction()) && SavedData.getNumLocations(this) < 1) {
+            setContentView(R.layout.no_location_layout);
+        }
+        else {
+            setContentView(R.layout.activity_start_session);
+            Button overwriteSession = findViewById(R.id.buttonOverwrite);
+            overwriteSession.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Start_Session.this, Overwrite_Session.class);
+                    startActivity(intent);
+                }
+            });
+            checkNFCIntent();
+            updateForCurrentLocation();
+        }
     }
 
     private void checkNFCIntent() {
