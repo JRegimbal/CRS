@@ -127,7 +127,7 @@
         android:background="@drawable/round_button"
         android:clickable="true"
         android:focusable="true"
-        android:text="Confirm"
+        android:text="@string/confirm_text"
         android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

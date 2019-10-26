@@ -24,7 +24,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Manage_Applications extends AppCompatActivity {
+public class Manage_Applications extends CRSActivity {
     private PackageManager pm;
     private String mode;
     private ArrayList<String> settingsToWrite;
@@ -34,12 +34,13 @@ public class Manage_Applications extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage__applications);
 
+        String label = getSupportActionBar().getTitle().toString();
+
         pm = getPackageManager();
         Intent intent = getIntent();
         mode = intent.getStringExtra("mode");
 
-        TextView intro = findViewById(R.id.manageApplicationsText);
-        intro.setText(intro.getText().toString() + " " + mode);
+        getSupportActionBar().setTitle(label + mode);
 
         updateAppList();
 
