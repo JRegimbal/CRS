@@ -41,7 +41,8 @@
                 <data android:scheme="uuid" />
             </intent-filter>
         </activity>
-        <activity android:name=".Overwrite_Session" />
+        <activity android:name=".Overwrite_Session"
+            android:label="Session and Settings" />
         <activity android:name=".Manage_Location" />
     </application>
 

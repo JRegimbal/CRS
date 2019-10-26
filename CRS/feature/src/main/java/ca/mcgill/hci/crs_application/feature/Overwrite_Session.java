@@ -33,7 +33,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 
-public class Overwrite_Session extends Activity {
+public class Overwrite_Session extends CRSActivity {
     private SharedPreferences preferences = null;
     private Map<String, String> nameToUUID = null;
     private String selId = null;
