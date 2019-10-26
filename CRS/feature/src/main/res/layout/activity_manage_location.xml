@@ -1,67 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/locationName"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="New Location"
-        android:inputType="textPersonName" />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/Associate"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_marginTop="30dp"
-            android:text="Associate Location with Mode:"
-            android:textColor="#000000"
-            android:textSize="25sp"
-            app:layout_constraintTop_toBottomOf="@id/buttonDeleteLocation" />
-
-        <Spinner
-            android:id="@+id/manageLocation_mode_spinner"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="8dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="16dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/locationName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="New Location"
+                android:inputType="textPersonName"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_conversion_absoluteHeight="45dp"
+                tools:layout_conversion_absoluteWidth="411dp" />
+
+            <TextView
+                android:id="@+id/Associate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Associated Mode"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/locationName"
+                tools:layout_conversion_absoluteHeight="40dp"
+                tools:layout_conversion_absoluteWidth="345dp" />
+
+            <Spinner
+                android:id="@+id/manageLocation_mode_spinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:entries="@array/mode_arrays"
+                app:layout_constraintBottom_toBottomOf="@+id/Associate"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/Associate"
+                app:layout_constraintTop_toTopOf="@+id/Associate"
+                tools:layout_conversion_absoluteHeight="24dp"
+                tools:layout_conversion_absoluteWidth="411dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView3"
+        app:layout_constraintVertical_bias="0.32999998">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonLocationConfirm"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:entries="@array/mode_arrays" />
-    </LinearLayout>
+            android:background="@drawable/round_button"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/confirm_text"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_conversion_absoluteHeight="65dp"
+            tools:layout_conversion_absoluteWidth="411dp" />
 
-    <Button
-        android:id="@+id/buttonLocationConfirm"
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:layout_marginTop="100dp"
-        android:background="@drawable/round_button"
-        android:clickable="true"
-        android:focusable="true"
-        android:text="@string/confirm_text"
-        android:textSize="20sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Associate" />
-
-    <Button
-        android:id="@+id/buttonDeleteLocation"
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:layout_marginTop="80dp"
-        android:background="@drawable/round_button"
-        android:clickable="true"
-        android:focusable="true"
-        android:text="Delete this Location"
-        android:textSize="20sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/message" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonDeleteLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/round_button"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="Delete this Location"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonLocationConfirm"
+            tools:layout_conversion_absoluteHeight="65dp"
+            tools:layout_conversion_absoluteWidth="411dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
