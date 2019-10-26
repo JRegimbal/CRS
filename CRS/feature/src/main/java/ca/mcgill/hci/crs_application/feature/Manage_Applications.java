@@ -22,6 +22,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Manage_Applications extends CRSActivity {
@@ -119,7 +121,14 @@ public class Manage_Applications extends CRSActivity {
     }
 
     private List<ApplicationInfo> getInstalledApplications() {
-        return pm.getInstalledApplications(PackageManager.GET_META_DATA);
+        List<ApplicationInfo> list = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+        Collections.sort(list, new Comparator<ApplicationInfo>() {
+            @Override
+            public int compare(ApplicationInfo a, ApplicationInfo b) {
+                return a.loadLabel(pm).toString().compareToIgnoreCase(b.loadLabel(pm).toString());
+            }
+        });
+        return list;
        /* for (ApplicationInfo info : applications) {
             Drawable icon = pm.getApplicationIcon(info);
             Log.d("App", info.packageName);
