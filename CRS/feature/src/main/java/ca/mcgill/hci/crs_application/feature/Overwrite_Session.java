@@ -150,7 +150,7 @@ public class Overwrite_Session extends CRSActivity {
                 String item = (String)currentLocSpinner.getSelectedItem();
                 SharedPreferences.Editor editor = preferences.edit();
                 String selUuid = nameToUUID.get(item);
-                if (!selId.equals(selUuid)) {
+                if (selId == null || !selId.equals(selUuid)) {
                     editor.putString(getString(R.string.current_location), selUuid);
                 }
 
