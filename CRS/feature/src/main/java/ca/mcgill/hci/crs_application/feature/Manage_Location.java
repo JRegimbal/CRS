@@ -12,6 +12,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -33,6 +35,10 @@ public class Manage_Location extends CRSActivity {
                 TextView locationName = findViewById(R.id.locationName);
                 Spinner modeSpinner = findViewById(R.id.manageLocation_mode_spinner);
                 if (uuid != null) {
+                    if (locationName.getText().toString().trim().length() == 0) {
+                        Snackbar.make(v, "Location Cannot Be Empty", Snackbar.LENGTH_LONG).show();
+                        return;
+                    }
                     try {
                         JSONObject obj = new JSONObject();
                         obj.put("uuid", uuid);
@@ -71,7 +77,7 @@ public class Manage_Location extends CRSActivity {
                         //startActivity(intent);
                     }
                     else {
-                        Toast.makeText(v.getContext(), "Cannot delete the only location!", Toast.LENGTH_LONG).show();
+                        Snackbar.make(v, "Cannot Delete Only Location", Snackbar.LENGTH_LONG).show();
                     }
                 }
             }
