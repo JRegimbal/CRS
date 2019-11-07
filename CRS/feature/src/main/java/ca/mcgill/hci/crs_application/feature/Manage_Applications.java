@@ -119,6 +119,11 @@ public class Manage_Applications extends CRSActivity {
 
     private List<ApplicationInfo> getInstalledApplications() {
         List<ApplicationInfo> list = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+        for (ApplicationInfo info : list) {
+            if ((info.flags & ApplicationInfo.FLAG_SYSTEM) == 1) {
+                list.remove(info);
+            }
+        }
         Collections.sort(list, new Comparator<ApplicationInfo>() {
             @Override
             public int compare(ApplicationInfo a, ApplicationInfo b) {
