@@ -119,7 +119,8 @@ public class Manage_Applications extends CRSActivity {
 
     private List<ApplicationInfo> getInstalledApplications() {
         List<ApplicationInfo> list = pm.getInstalledApplications(PackageManager.GET_META_DATA);
-        for (ApplicationInfo info : list) {
+        for (int i = 0; i < list.size(); i++) {
+            ApplicationInfo info = list.get(i);
             if ((info.flags & ApplicationInfo.FLAG_SYSTEM) == 1) {
                 list.remove(info);
             }
