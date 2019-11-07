@@ -6,4 +6,12 @@
         android:id="@+id/user_guide_item"
         android:title="@string/user_guide"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/import_settings_item"
+        android:title="Import Settings"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/export_settings_item"
+        android:title="Export Settings"
+        app:showAsAction="never" />
 </menu>
