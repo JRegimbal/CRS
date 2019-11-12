@@ -2,18 +2,14 @@ package ca.mcgill.hci.crs_application.feature;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,7 +17,7 @@ import org.json.JSONObject;
 
 import java.util.UUID;
 
-public class Start_Session extends CRSActivity {
+public class Start_Session_NFC extends CRSActivity {
 
     private JSONObject jsonObject = null;
     private SharedPreferences preferences = null;
@@ -36,14 +32,13 @@ public class Start_Session extends CRSActivity {
             setContentView(R.layout.no_location_layout);
         }
         else {
-            setContentView(R.layout.activity_start_session);
+            setContentView(R.layout.activity_start_session_nfc);
 
-
-            Button overwriteSession = findViewById(R.id.buttonOverwrite);
+            Button overwriteSession = findViewById(R.id.buttonOverwrite_wifi);
             overwriteSession.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(Start_Session.this, Overwrite_Session.class);
+                    Intent intent = new Intent(Start_Session_NFC.this, Overwrite_Session.class);
                     startActivity(intent);
                 }
             });
@@ -60,12 +55,12 @@ public class Start_Session extends CRSActivity {
             setContentView(R.layout.no_location_layout);
         }
         else {
-            setContentView(R.layout.activity_start_session);
-            Button overwriteSession = findViewById(R.id.buttonOverwrite);
+            setContentView(R.layout.activity_start_session_nfc);
+            Button overwriteSession = findViewById(R.id.buttonOverwrite_wifi);
             overwriteSession.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(Start_Session.this, Overwrite_Session.class);
+                    Intent intent = new Intent(Start_Session_NFC.this, Overwrite_Session.class);
                     startActivity(intent);
                 }
             });
@@ -114,7 +109,7 @@ public class Start_Session extends CRSActivity {
                         }
                         editor.commit();
                         // Call manage_location_activity
-                        Intent intent = new Intent(Start_Session.this, Manage_Location.class);
+                        Intent intent = new Intent(Start_Session_NFC.this, Manage_Location.class);
                         intent.putExtra("uuid", uuid.toString());
                         startActivity(intent);
                     } else {
@@ -135,8 +130,8 @@ public class Start_Session extends CRSActivity {
     }
 
     private void setLocationAndModeText(String location, String mode) {
-        TextView modeText = findViewById(R.id.mode);
-        TextView locationText = findViewById(R.id.location);
+        TextView modeText = findViewById(R.id.mode_wifi);
+        TextView locationText = findViewById(R.id.location_wifi);
         modeText.setText("Mode: " + mode);
         locationText.setText("Location: " + location);
     }

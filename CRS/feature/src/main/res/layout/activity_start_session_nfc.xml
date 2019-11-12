@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/mode"
+            android:id="@+id/mode_wifi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="16dp"
@@ -45,7 +45,7 @@
         app:strokeWidth="1dp">
 
         <TextView
-            android:id="@+id/location"
+            android:id="@+id/location_wifi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="16dp"
@@ -55,7 +55,7 @@
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonOverwrite"
+        android:id="@+id/buttonOverwrite_wifi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
