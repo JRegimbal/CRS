@@ -65,7 +65,8 @@ public class Overwrite_Session extends CRSActivity {
         final Spinner sp = (Spinner)findViewById(R.id.overwrite_location_spinner);
         final Spinner currentLocSpinner = findViewById(R.id.overwrite_current_location_spinner);
         final Spinner modeSpinner = findViewById(R.id.modespinner);
-        final ArrayAdapter<String> ar = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,locationNames);
+        final ArrayAdapter<String> ar = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,locationNames);
+        //ar.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp.setAdapter(ar);
         sp.setOnItemSelectedListener(new OnItemSelectedListener()
         {

@@ -53,8 +53,9 @@ public class Manage_Location extends CRSActivity {
                     Log.e("Manage", "UUID is null!");
                 }
 
-                Intent intent = new Intent(Manage_Location.this, Start_Session.class);
-                startActivity(intent);
+                finish();
+                // Intent intent = new Intent(Manage_Location.this, Start_Session.class);
+                // startActivity(intent);
             }
         });
 
