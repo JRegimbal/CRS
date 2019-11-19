@@ -27,7 +27,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.Objects;
 
-class CRSActivity extends AppCompatActivity {
+abstract class CRSActivity extends AppCompatActivity {
     private static final int READ_REQUEST_CODE = 424;
     private static final int WRITE_REQUEST_CODE = 42;
     private static final String mediaType = "*/*";
