@@ -19,7 +19,7 @@ import java.util.UUID;
 class SavedData {
     private static final String filename = "CRS User Data.json";
 
-    public static JSONObject getFileContents(Context context) {
+    static JSONObject getFileContents(Context context) {
         File jsonFile = new File(context.getFilesDir(), filename);
         if (jsonFile.exists()) {
             try {
@@ -42,7 +42,7 @@ class SavedData {
         return buildNewJSON();
     }
 
-    public static boolean writeFileContents(Context context, JSONObject jsonObject) {
+    static boolean writeFileContents(Context context, JSONObject jsonObject) {
         try {
             String jsonText = jsonObject.toString(4);
             FileOutputStream os = context.openFileOutput(filename, Context.MODE_PRIVATE);
@@ -58,7 +58,7 @@ class SavedData {
         return false;
     }
 
-    public static void updateOrAddLocation(Context context, JSONObject location) throws Exception {
+    static void updateOrAddLocation(Context context, JSONObject location) throws Exception {
         if (location.has("uuid") && location.has("name") && location.has("mode")) {
             JSONObject contents = getFileContents(context);
             JSONArray locations = contents.getJSONArray("locations");
@@ -83,7 +83,7 @@ class SavedData {
         }
     }
 
-    public static JSONArray getSettings(Context context, String mode) {
+    static JSONArray getSettings(Context context, String mode) {
         JSONArray settings = null;
         try {
             JSONObject contents = getFileContents(context);
@@ -95,7 +95,7 @@ class SavedData {
         return settings;
     }
 
-    public static void writeSettings(Context context, String mode, JSONArray array) throws Exception {
+    static void writeSettings(Context context, String mode, JSONArray array) throws Exception {
         JSONObject contents = getFileContents(context);
         JSONObject settings = contents.getJSONObject("settings");
         settings.put(mode.toLowerCase(), array);
@@ -103,7 +103,7 @@ class SavedData {
         writeFileContents(context, contents);
     }
 
-    public static JSONObject getLocation(Context context, String uuid) {
+    static JSONObject getLocation(Context context, String uuid) {
         JSONObject location = null;
         try {
             JSONObject contents = getFileContents(context);
@@ -121,7 +121,7 @@ class SavedData {
         return location;
     }
 
-    public static int getNumLocations(Context context) {
+    static int getNumLocations(Context context) {
         int locations = 0;
         try {
             JSONObject contents = getFileContents(context);
@@ -133,7 +133,7 @@ class SavedData {
         return locations;
     }
 
-    public static void deleteLocation(Context context, String uuid) {
+    static void deleteLocation(Context context, String uuid) {
         try {
             JSONObject contents = getFileContents(context);
             JSONArray locations = contents.getJSONArray("locations");
