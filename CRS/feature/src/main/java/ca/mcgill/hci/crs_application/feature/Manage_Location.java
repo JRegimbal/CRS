@@ -77,9 +77,8 @@ public class Manage_Location extends CRSActivity {
                         //Intent intent = new Intent(Manage_Location.this, Start_Session.class);
                         //startActivity(intent);
                     }
-                    else {
+                    else
                         Snackbar.make(v, "Cannot Delete Only Location", Snackbar.LENGTH_LONG).show();
-                    }
                 }
             }
         });

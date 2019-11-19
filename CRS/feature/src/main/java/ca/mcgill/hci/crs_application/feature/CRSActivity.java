@@ -30,6 +30,7 @@ import java.util.Objects;
 abstract class CRSActivity extends AppCompatActivity {
     private static final int READ_REQUEST_CODE = 424;
     private static final int WRITE_REQUEST_CODE = 42;
+    private static final int LOCATION_REQUEST_CODE = 24;
     private static final String mediaType = "*/*";
 
     @Override
@@ -80,7 +81,22 @@ abstract class CRSActivity extends AppCompatActivity {
             }
             return true;
         }
+        else if (item.getItemId() == R.id.wifi_menu_item) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(
+                        this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        LOCATION_REQUEST_CODE
+                );
+            }
+            else {
+                Intent intent = new Intent(this, WifiSwitchOrAdd.class);
+                startActivity(intent);
+            }
+            return true;
+        }
         else {
+            Log.d("CRS", String.valueOf(item.getItemId()));
             return super.onOptionsItemSelected(item);
         }
     }
@@ -143,6 +159,12 @@ abstract class CRSActivity extends AppCompatActivity {
                     startActivityForResult(intent, WRITE_REQUEST_CODE);
                 }
                 break;
+            case LOCATION_REQUEST_CODE:
+                if (grantResults.length > 0 &&
+                grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Intent intent = new Intent(this, WifiSwitchOrAdd.class);
+                    startActivity(intent);
+                }
             default:
                 break;
         }

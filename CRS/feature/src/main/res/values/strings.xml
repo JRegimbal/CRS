@@ -4,6 +4,7 @@
     <string name="override_mode">overrideMode</string>
     <string name="settings_button">Manage Session and Settings</string>
     <string name="confirm_text">Confirm</string>
+    <string name="cancel_text">Cancel</string>
     <string name="current_location">location</string>
     <string name="user_guide">User Guide</string>
     <string name="user_guide_url">http://www.cim.mcgill.ca/~jer/courses/hci/project/2019/www.ece.mcgill.ca/~jregim/hci/notebook/beta/user-manual.html</string>

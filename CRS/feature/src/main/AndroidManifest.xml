@@ -8,8 +8,11 @@
 
     <uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application>
+
         <service
             android:name=".NotificationListener"
             android:enabled="true"
@@ -20,26 +23,30 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".Manage_Applications"
-            android:parentActivityName=".Overwrite_Session"
-            android:label="Notifications Enabled for "/>
-
-
-        <activity android:name=".Start_Session"
+        <activity
+            android:name=".Manage_Applications"
+            android:label="Notifications Enabled for "
+            android:parentActivityName=".Overwrite_Session" />
+        <activity
+            android:name=".Start_Session"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".Overwrite_Session"
-            android:parentActivityName=".Start_Session"
-            android:label="Session and Settings" />
-
-        <activity android:name=".Manage_Location"
+        <activity
+            android:name=".Overwrite_Session"
+            android:label="Session and Settings"
+            android:parentActivityName=".Start_Session" />
+        <activity
+            android:name=".Manage_Location"
             android:label="Manage Location"
-            android:parentActivityName=".Overwrite_Session"/>
+            android:parentActivityName=".Overwrite_Session" />
+        <activity android:name=".WifiSwitchOrAdd"
+            android:label="WiFi Location Settings"></activity>
+
     </application>
 
 </manifest>
