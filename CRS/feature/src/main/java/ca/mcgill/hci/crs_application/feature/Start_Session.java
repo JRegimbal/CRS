@@ -1,6 +1,8 @@
 package ca.mcgill.hci.crs_application.feature;
 
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.nfc.NdefMessage;
@@ -31,32 +33,26 @@ public class Start_Session extends CRSActivity {
         super.onCreate(savedInstanceState);
 
         preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
-        if (!NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent().getAction()) && SavedData.getNumLocations(this) < 1) {
-            setContentView(R.layout.no_location_layout);
-        }
-        else {
-            setContentView(R.layout.activity_start_session);
-
-
-            Button overwriteSession = findViewById(R.id.buttonOverwrite);
-            overwriteSession.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(Start_Session.this, Overwrite_Session.class);
-                    startActivity(intent);
-                }
-            });
-            checkNFCIntent();
-
-            updateForCurrentLocation();
-        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (!NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent().getAction()) && SavedData.getNumLocations(this) < 1) {
+
+        // Get adapter for this
+        NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
+        Intent intent = new Intent(this, this.getClass());
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        IntentFilter filter = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
+        filter.addDataScheme("uuid");
+        IntentFilter[] filters = {
+                filter
+        };
+
+        adapter.enableForegroundDispatch(this, pendingIntent, filters, null);
+
+        if (SavedData.getNumLocations(this) < 1) {
             setContentView(R.layout.no_location_layout);
         }
         else {
@@ -69,16 +65,23 @@ public class Start_Session extends CRSActivity {
                     startActivity(intent);
                 }
             });
-            checkNFCIntent();
+            // checkNFCIntent();
             updateForCurrentLocation();
         }
     }
 
-    private void checkNFCIntent() {
-        // Check if this was opened by a NFC tag
-        if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent().getAction())) {
-            NdefMessage message = (NdefMessage) getIntent().getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)[0];
-            // Try to parse as UUID even though URI type is known to be UID
+    @Override
+    public void onPause() {
+        super.onPause();
+        NfcAdapter.getDefaultAdapter(this).disableForegroundDispatch(this);
+    }
+
+    @Override
+    public void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+        if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(intent.getAction())) {
+            NdefMessage message = (NdefMessage) intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)[0];
             UUID uuid = null;
             try {
                 String uuidText = new String(message.getRecords()[0].getPayload());
@@ -114,9 +117,9 @@ public class Start_Session extends CRSActivity {
                         }
                         editor.commit();
                         // Call manage_location_activity
-                        Intent intent = new Intent(Start_Session.this, Manage_Location.class);
-                        intent.putExtra("uuid", uuid.toString());
-                        startActivity(intent);
+                        Intent i = new Intent(Start_Session.this, Manage_Location.class);
+                        i.putExtra("uuid", uuid.toString());
+                        startActivity(i);
                     } else {
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.putString(getString(R.string.current_location), uuid.toString());
