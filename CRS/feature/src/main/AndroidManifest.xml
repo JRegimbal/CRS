@@ -24,23 +24,6 @@
             android:parentActivityName=".Overwrite_Session"
             android:label="Notifications Enabled for "/>
 
-        <activity
-            android:name=".Launch"
-            android:label="@string/app_name">
-            <!--<intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
-        </activity>
-
-        <activity android:name=".Returning_User"
-            android:label="@string/title_returning_home"/>
-
-        <activity android:name=".login" />
-
-        <activity android:name=".New_User"
-            android:label="@string/title_home"/>
 
         <activity android:name=".Start_Session"
             android:label="@string/app_name">
