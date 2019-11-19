@@ -6,7 +6,7 @@
     <string name="confirm_text">Confirm</string>
     <string name="current_location">location</string>
     <string name="user_guide">User Guide</string>
-    <string name="user_guide_url">http://www.cim.mcgill.ca/~jer/courses/hci/project/2019/www.ece.mcgill.ca/~jregim/hci/notebook/alpha/user-manual.html</string>
+    <string name="user_guide_url">http://www.cim.mcgill.ca/~jer/courses/hci/project/2019/www.ece.mcgill.ca/~jregim/hci/notebook/beta/user-manual.html</string>
     <string-array name="mode_arrays">
         <item>Work</item>
         <item>Relax</item>
