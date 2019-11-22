@@ -60,6 +60,8 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
         android:text="@string/settings_button"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
