@@ -95,6 +95,11 @@ abstract class CRSActivity extends AppCompatActivity {
             }
             return true;
         }
+        else if (item.getItemId() == R.id.session_settings_menu_item) {
+            Intent intent = new Intent(this, Overwrite_Session.class);
+            startActivity(intent);
+            return true;
+        }
         else {
             Log.d("CRS", String.valueOf(item.getItemId()));
             return super.onOptionsItemSelected(item);

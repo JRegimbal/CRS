@@ -15,6 +15,10 @@
         android:title="Export Settings"
         app:showAsAction="never" />
     <item
+        android:id="@+id/session_settings_menu_item"
+        android:title="@string/settings_button"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/wifi_menu_item"
         android:title="WiFi"
         app:showAsAction="never" />

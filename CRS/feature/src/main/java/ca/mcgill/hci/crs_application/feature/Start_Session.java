@@ -65,6 +65,22 @@ public class Start_Session extends CRSActivity {
                     startActivity(intent);
                 }
             });
+
+            TextView textLocation = findViewById(R.id.location);
+            textLocation.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(view.getContext(), "Click the button below to change location", Toast.LENGTH_LONG).show();
+                }
+            });
+
+            TextView textMode = findViewById(R.id.mode);
+            textMode.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(view.getContext(), "Click the button below to change mode", Toast.LENGTH_LONG).show();
+                }
+            });
             // checkNFCIntent();
             updateForCurrentLocation();
         }
