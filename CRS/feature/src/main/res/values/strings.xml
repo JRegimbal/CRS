@@ -1,6 +1,4 @@
 <resources>
-    <string name="title_home">Welcome to CRS!</string>
-    <string name="title_returning_home">Welcome back!</string>
     <string name="override_mode">overrideMode</string>
     <string name="settings_button">Manage Session and Settings</string>
     <string name="confirm_text">Confirm</string>
@@ -12,17 +10,6 @@
         <item>Work</item>
         <item>Relax</item>
         <item>Social</item>
-    </string-array>
-    <string-array name="notification_arrays">
-        <item>Ring</item>
-        <item>Vibrate</item>
-        <item>Dismiss All Notifications</item>
-    </string-array>
-    <string-array name="location_arrays">
-        <item>No selection</item>
-        <item>Location1</item>
-        <item>Location1</item>
-        <item>Location1</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->

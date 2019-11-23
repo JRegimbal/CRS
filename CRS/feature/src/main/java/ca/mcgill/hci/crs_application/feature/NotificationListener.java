@@ -1,9 +1,7 @@
 package ca.mcgill.hci.crs_application.feature;
 
-import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.service.notification.NotificationListenerService;
