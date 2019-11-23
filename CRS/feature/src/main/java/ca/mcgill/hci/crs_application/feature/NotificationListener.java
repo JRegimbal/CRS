@@ -69,7 +69,7 @@ public class NotificationListener extends NotificationListenerService {
                 for (int i=  0; i < applications.length(); i++) {
                     list.add(applications.getString(i));
                 }
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 Log.e("NotificationListener", e.getMessage());
             }
         }

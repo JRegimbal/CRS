@@ -1,6 +1,7 @@
 package ca.mcgill.hci.crs_application.feature;
 
 import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -8,11 +9,14 @@ import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.core.app.NotificationManagerCompat;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,6 +39,10 @@ public class Start_Session extends CRSActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        if (!NotificationManagerCompat.getEnabledListenerPackages(this).contains(getPackageName())) {
+            Intent intent = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
+            startActivity(intent);
+        }
 
         // Get adapter for this
         NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
