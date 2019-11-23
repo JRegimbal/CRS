@@ -1,5 +1,7 @@
 package ca.mcgill.hci.crs_application.feature;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
@@ -12,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.Button;
+import android.widget.ListPopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -20,6 +23,11 @@ import android.widget.TextView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Toast;
+
+import androidx.appcompat.widget.AppCompatSpinner;
+import androidx.recyclerview.widget.ListAdapter;
+
+import com.google.android.material.button.MaterialButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -62,25 +70,26 @@ public class Overwrite_Session extends CRSActivity {
         String overrideMode = preferences.getString(getString(R.string.override_mode), null);
 
         ArrayList<String> locationNames = getLocationNames();
-        ArrayList<String> onlyNames = (ArrayList<String>)locationNames.clone();
+        final ArrayList<String> onlyNames = (ArrayList<String>)locationNames.clone();
 
         final RadioGroup modeGroup = findViewById(R.id.modeGroup);
 
-        final ArrayAdapter<String> ar1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, onlyNames);
+        // Create spinner for location management (hidden)
+        // final Spinner locManSpinner = new Spinner(this, Spinner.MODE_DIALOG);
+
+        final ArrayAdapter<String> locationArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, onlyNames);
         locationNames.add(0, "No selection");
-        // final String[] spstr = getResources().getStringArray(R.array.location_arrays);
-        final Spinner sp = (Spinner)findViewById(R.id.overwrite_location_spinner);
         final Spinner currentLocSpinner = findViewById(R.id.overwrite_current_location_spinner);
-        final ArrayAdapter<String> ar = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,locationNames);
-        //ar.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        final ArrayAdapter<String> ar = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, locationNames);
 
         // Set up location management spinner
-        sp.setAdapter(ar);
-        sp.setOnItemSelectedListener(new OnItemSelectedListener()
+        /*locManSpinner.setAdapter(ar);
+        locManSpinner.setOnItemSelectedListener(new OnItemSelectedListener()
         {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
+                Log.d("Spinner", "Item selected");
                 String s=((TextView)view).getText().toString();
 
                 if(!s.equals("No selection")) {
@@ -93,11 +102,36 @@ public class Overwrite_Session extends CRSActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent)
             {
+                Log.d("Spinner", "Nothing selected");
+            }
+        }); */
+
+        MaterialButton manageLocationButton = findViewById(R.id.manageLocationButton);
+        manageLocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                builder.setTitle("Select a Location to Manage");
+                final Intent intent = new Intent(view.getContext(), Manage_Location.class);
+                final String values[] = onlyNames.toArray(new String[onlyNames.size()]);
+                builder.setItems(values, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String name = values[i];
+                        String uuid = nameToUUID.get(name);
+                        intent.putExtra("uuid", uuid);
+                        startActivity(intent);
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                // locManSpinner.setVisibility(View.VISIBLE);
+                // locManSpinner.performClick();
             }
         });
 
         // Set up location override spinner
-        currentLocSpinner.setAdapter(ar1);
+        currentLocSpinner.setAdapter(locationArrayAdapter);
         currentLocSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
