@@ -12,11 +12,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,17 +59,22 @@ public class Overwrite_Session extends CRSActivity {
     private void setUpMenu() {
         preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         selId = preferences.getString(getString(R.string.current_location), null);
+        String overrideMode = preferences.getString(getString(R.string.override_mode), null);
 
         ArrayList<String> locationNames = getLocationNames();
         ArrayList<String> onlyNames = (ArrayList<String>)locationNames.clone();
+
+        final RadioGroup modeGroup = findViewById(R.id.modeGroup);
+
         final ArrayAdapter<String> ar1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, onlyNames);
         locationNames.add(0, "No selection");
         // final String[] spstr = getResources().getStringArray(R.array.location_arrays);
         final Spinner sp = (Spinner)findViewById(R.id.overwrite_location_spinner);
         final Spinner currentLocSpinner = findViewById(R.id.overwrite_current_location_spinner);
-        final Spinner modeSpinner = findViewById(R.id.modespinner);
         final ArrayAdapter<String> ar = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,locationNames);
         //ar.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // Set up location management spinner
         sp.setAdapter(ar);
         sp.setOnItemSelectedListener(new OnItemSelectedListener()
         {
@@ -88,6 +96,7 @@ public class Overwrite_Session extends CRSActivity {
             }
         });
 
+        // Set up location override spinner
         currentLocSpinner.setAdapter(ar1);
         currentLocSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
@@ -97,12 +106,22 @@ public class Overwrite_Session extends CRSActivity {
                 JSONObject obj = SavedData.getLocation(view.getContext(), uuid);
                 try {
                     String mode = obj.getString("mode");
-                    String[] modes = getResources().getStringArray(R.array.mode_arrays);
-                    for (int j = 0; j < modes.length; j++) {
-                        if (mode.equals(modes[j])) {
-                            modeSpinner.setSelection(j);
+                    RadioButton button = null;
+                    switch (mode) {
+                        case "Work":
+                            button = findViewById(R.id.workRadioButton);
                             break;
-                        }
+                        case "Social":
+                            button = findViewById(R.id.socialRadioButton);
+                            break;
+                        case "Relax":
+                            button = findViewById(R.id.relaxRadioButton);
+                            break;
+                        default:
+                            Log.i("Mode", mode);
+                    }
+                    if (button != null) {
+                        button.toggle();
                     }
                 } catch (JSONException e) {
                     Log.i("JSON", e.getMessage());
@@ -115,30 +134,45 @@ public class Overwrite_Session extends CRSActivity {
             }
         });
 
+        // Manage Applications button
         Button manageApplications = findViewById(R.id.manageApplicationButton);
         manageApplications.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), Manage_Applications.class);
-                intent.putExtra("mode", (String)modeSpinner.getSelectedItem());
+                RadioButton selected = findViewById(modeGroup.getCheckedRadioButtonId());
+                intent.putExtra("mode", selected.getText().toString());
                 startActivity(intent);
             }
         });
 
+        // Set up presets
         if (selId != null) {
             JSONObject obj = SavedData.getLocation(this, selId);
             try {
-                String mode = obj.getString("mode");
-                String[] modes = getResources().getStringArray(R.array.mode_arrays);
-                for (int i = 0; i < modes.length; i++) {
-                    if (mode.equals(modes[i])) {
-                        modeSpinner.setSelection(i);
+                String mode = (overrideMode != null ? overrideMode : obj.getString("mode"));
+                RadioButton button = null;
+                switch (mode) {
+                    case "Work":
+                        button = findViewById(R.id.workRadioButton);
                         break;
-                    }
+                    case "Social":
+                        button = findViewById(R.id.socialRadioButton);
+                        break;
+                    case "Relax":
+                        button = findViewById(R.id.relaxRadioButton);
+                        break;
+                    default:
+                        Log.i("Mode", mode);
+                }
+                if (button != null) {
+                    button.toggle();
                 }
             } catch (JSONException e) {
                 Log.i("JSON", e.getMessage());
             }
+        } else {
+            Log.e("SelId", "SelId is null");
         }
 
         if (selIdx > 0)
@@ -158,8 +192,9 @@ public class Overwrite_Session extends CRSActivity {
                 JSONObject obj = SavedData.getLocation(view.getContext(), selUuid);
                 try {
                     String mode = obj.getString("mode");
-                    if (!mode.equals(modeSpinner.getSelectedItem().toString())) {
-                        editor.putString(getString(R.string.override_mode), modeSpinner.getSelectedItem().toString());
+                    RadioButton selected = findViewById(modeGroup.getCheckedRadioButtonId());
+                    if (!mode.equals(selected.getText().toString())) {
+                        editor.putString(getString(R.string.override_mode), selected.getText().toString());
                     } else {
                         editor.remove(getString(R.string.override_mode));
                     }

@@ -39,6 +39,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
+                android:dropDownWidth="wrap_content"
                 android:spinnerMode="dialog"
                 app:layout_constraintBottom_toBottomOf="@+id/location"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -54,16 +55,37 @@
                 app:layout_constraintStart_toStartOf="@+id/location"
                 app:layout_constraintTop_toBottomOf="@+id/location" />
 
-            <Spinner
-                android:id="@+id/modespinner"
-                android:layout_width="0dp"
+            <RadioGroup
+                android:id="@+id/modeGroup"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:entries="@array/mode_arrays"
-                app:layout_constraintBottom_toBottomOf="@+id/mode"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/mode"
-                app:layout_constraintTop_toTopOf="@+id/mode" />
+                app:layout_constraintTop_toTopOf="@+id/mode">
+
+                <RadioButton
+                    android:id="@+id/workRadioButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Work"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/socialRadioButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Social"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/relaxRadioButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Relax"
+                    android:textSize="18sp" />
+            </RadioGroup>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
