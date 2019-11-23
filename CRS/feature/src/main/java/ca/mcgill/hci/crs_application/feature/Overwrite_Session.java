@@ -74,37 +74,10 @@ public class Overwrite_Session extends CRSActivity {
 
         final RadioGroup modeGroup = findViewById(R.id.modeGroup);
 
-        // Create spinner for location management (hidden)
-        // final Spinner locManSpinner = new Spinner(this, Spinner.MODE_DIALOG);
-
         final ArrayAdapter<String> locationArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, onlyNames);
         locationNames.add(0, "No selection");
         final Spinner currentLocSpinner = findViewById(R.id.overwrite_current_location_spinner);
         final ArrayAdapter<String> ar = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, locationNames);
-
-        // Set up location management spinner
-        /*locManSpinner.setAdapter(ar);
-        locManSpinner.setOnItemSelectedListener(new OnItemSelectedListener()
-        {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-            {
-                Log.d("Spinner", "Item selected");
-                String s=((TextView)view).getText().toString();
-
-                if(!s.equals("No selection")) {
-                    String uuid = nameToUUID.get(s);
-                    Intent intent = new Intent(view.getContext(), Manage_Location.class);
-                    intent.putExtra("uuid", uuid);
-                    startActivity(intent);
-                }
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent)
-            {
-                Log.d("Spinner", "Nothing selected");
-            }
-        }); */
 
         MaterialButton manageLocationButton = findViewById(R.id.manageLocationButton);
         manageLocationButton.setOnClickListener(new View.OnClickListener() {
@@ -125,8 +98,6 @@ public class Overwrite_Session extends CRSActivity {
                 });
                 AlertDialog dialog = builder.create();
                 dialog.show();
-                // locManSpinner.setVisibility(View.VISIBLE);
-                // locManSpinner.performClick();
             }
         });
 
@@ -238,8 +209,6 @@ public class Overwrite_Session extends CRSActivity {
 
                 editor.apply();
                 finish();
-                //Intent intent = new Intent(view.getContext(), Start_Session.class);
-                //startActivity(intent);
             }
         });
     }
