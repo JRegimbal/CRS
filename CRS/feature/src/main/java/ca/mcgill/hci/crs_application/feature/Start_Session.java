@@ -59,6 +59,14 @@ public class Start_Session extends CRSActivity {
 
         if (SavedData.getNumLocations(this) < 1) {
             setContentView(R.layout.no_location_layout);
+            TextView wifiButton = findViewById(R.id.wifi_location_text);
+            wifiButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(Start_Session.this, WifiSwitchOrAdd.class);
+                    startActivity(intent);
+                }
+            });
         }
         else {
             setContentView(R.layout.activity_start_session);
